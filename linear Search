@@ -1,0 +1,70 @@
+/* Linear Search c implementation */
+#include<stdio.h>
+int compcount=0;
+int linearsearch(int num,int A[],int n)
+{
+    int i;
+    for(i=0;i<n;i++)
+    {
+        compcount++;
+        if(A[i]==num)
+        {
+            return i;
+        }     
+    }
+    return -1;
+}
+void accept(int n,int A[])
+{
+    int i;
+    for(i=0;i<n;i++)
+    {
+        printf("\n Enter %d Element..:",i);
+        scanf("%d",&A[i]);
+    }
+    for(i=0;i<n;i++)
+    {
+        printf("\n %d",A[i]); 
+    }
+}
+void main()
+{
+    int A[20];
+    int i,n,num,pos;
+    printf("\n enter the list elements: ");
+    printf("\n How many Elements:");
+    scanf("%d",&n);
+    accept(n,A);
+    printf("\n Enter the Element To be Searched:");
+    scanf("%d",&num);
+    pos=linearsearch(num,A,n);
+    if(pos==-1)
+    {
+        printf("\n %d not found in list",num);
+    }
+    else{
+        printf("\n Element found at position %d",pos);
+        printf("\n Number of Comparison: %d", compcount);
+    } 
+    
+}
+
+/* enter the list elements:
+ How many Elements:4
+
+ Enter 0 Element..:1
+
+ Enter 1 Element..:2
+
+ Enter 2 Element..:3
+
+ Enter 3 Element..:4
+
+ 0
+ 1
+ 2
+ 3
+ Enter the Element To be Searched:4
+
+ Element found at position 3
+[Process completed (code 29) - press Enter] */
