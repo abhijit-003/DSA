@@ -1,0 +1,104 @@
+//Dynamic implementation of Stack Operations
+
+#include<stdio.h>
+
+int count=0;
+typedef struct node
+{
+    int data;
+    struct node *next;
+}NODE;
+
+NODE *top;
+
+void initialize()
+{
+    top=NULL;
+}
+int isempty()
+{
+    return(top==NULL);
+}
+void push(int data)
+{
+    NODE *newnode;
+    newnode=(NODE *)malloc(sizeof(NODE));
+    newnode->data=data;
+    newnode->next=top;
+    top=newnode; 
+    count++;
+}
+int pop()
+{
+    NODE *temp;
+    int num;
+    temp=top;
+    num=top->data;
+    top=top->next;
+    free(temp);
+    return(num);
+    count--;
+}
+int peek()
+{
+    return(top->data);
+}
+
+int main()
+{
+    int a,ch,num;
+    initialize();
+    do
+    {
+    printf("\n#####################################");
+    printf("\nSELECT THE OPERATION");
+    printf("\n 1.PUSH");
+    printf("\n 2.POP");
+    printf("\n 3.PEEK");
+    printf("\n 4.TOTAL ELEMENTS");
+    printf("\n 0.EXIT");
+    printf("\n#####################################");
+    printf("\nEnter Your choice: ");
+    scanf("%d",&ch);
+    switch(ch)
+    {
+        case 1:
+            printf("\nEnter the Element to Push: ");
+            scanf("%d",&num);
+            push(num);
+            
+            break;
+        case 2:
+            if(isempty()==1)
+            {
+            printf("\nStack is empty!!");
+            }
+            else
+            {
+                num=pop();
+                printf("\nPoped Element is %d.",num);
+    
+            }
+            break;
+        case 3:
+            if(isempty()==1)
+            {
+            printf("\nStack is empty!!");
+            }
+            else
+            {
+            num=peek();
+            printf("\n Top element: %d",num);
+            }
+            break;
+
+        case 4:
+            printf("\nTotal Elements:  %d",count);
+            break;
+        case 0:
+            exit(0);
+            break;
+        default:
+        printf("\nEnter Correct choice!!");
+    }    
+    }while(ch!=0);
