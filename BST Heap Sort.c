@@ -72,3 +72,4 @@ int main()
     printf("\n SORTED HEAP: ");
     printf("\n");
     display(a,n);
+}
