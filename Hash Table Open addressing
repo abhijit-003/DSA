@@ -1,0 +1,120 @@
+// Abhijit Chavan
+// Linear Probeing
+
+#include<stdio.h>
+// Linear hashing
+int linearhf(int key, int i)
+{
+    return((key%10+i)%10);
+}
+// quadratic hashing
+int quadrichf(int key,int i)
+{
+    int c1=2,c2=3;
+    return(key%10 + c1*i+ c2*i*i % 10);
+}
+//rehashing
+int rehashinghf(int key,int i)
+{
+    return(key%10 + i*(key % 8) % 10);
+}
+//Double hashing
+int doublehashinghf(int key,int i)
+{
+ 
+}
+void insert(int H[10], int key)
+{
+    int index,i;
+    for(i=0;i<10;i++)
+    {
+         index=linearhf(key,i);
+        if(H[index]==-1)
+        {
+            H[index]=key;
+            return;
+        }
+    }
+    printf("\n key couldn't inserted!!");
+}
+
+int search(int H[10], int key)
+{
+    int n=10,i, index;    
+    for(i=0;i<n;i++)
+    {
+        index=linearhf(key,i);
+        if(H[index]==key)
+        return(index);
+    }
+    return(-1);
+ }
+
+void show(int H[10])
+{
+    int i;
+    for(i=0;i<10;i++)
+    printf("\n %d[%d]",i,H[i]);
+}
+void delete(int H[10], int key)
+{
+    int i,found;
+    found=search(H,key);
+    if(found==-1)
+    {
+        printf("\n element not found");
+    }
+    else{
+        H[found]=-1;
+        printf("\n Deletion succesfully");
+     }
+    
+
+}
+int main()
+{
+    int index, H[10], found, choice,key, i;
+    for(i=0;i<10;i++)
+    {
+        H[i]=-1;
+    }
+    do{
+    printf("\n Select your choice");
+    printf("\n 0..EXIT:");
+    printf("\n 1..INSERT:");
+    printf("\n 2..SEARCH:");
+    printf("\n 3..SHOW:");
+    printf("\n 4..DELETE:");
+    printf("\n ENTER YOUR CHOICE: ");
+    scanf("%d",&choice);
+    switch(choice)
+    {
+        case 1:
+            printf("\n Enter the element to be insert: ");
+            scanf("%d",&key);
+            insert(H,key);
+            break;
+        case 2:
+            printf("\n Enter element to search: ");
+            scanf("%d",&key);
+            found=search(H,key);
+            if(found==-1)
+            {
+                printf("\n key not found!!");
+            }
+            else{
+                printf("\n %d Found at %d position.",found);
+            }
+             break;
+        case 3:
+            printf("\n Hash Table: ");
+            show(H);
+            break;
+        case 4:
+            printf("\n enrer key to delete: ");
+            scanf("%d",&key);
+            delete(H,key);
+            break;
+    }
+    }while(choice!=0);
+}
